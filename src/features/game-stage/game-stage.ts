@@ -1,0 +1,17 @@
+export const GAME_STAGE = {
+	START: 'START',
+	NAMING: 'NAMING',
+	DRAWING: 'DRAWING',
+	WHERE: 'WHERE',
+	RESULTS: 'RESULTS',
+} as const
+
+export type GameStage = (typeof GAME_STAGE)[keyof typeof GAME_STAGE]
+
+export const GAME_STAGE_DURATIONS = {
+	[GAME_STAGE.START]: 3,
+	[GAME_STAGE.NAMING]: 10,
+	[GAME_STAGE.DRAWING]: 4,
+	[GAME_STAGE.WHERE]: 3,
+	[GAME_STAGE.RESULTS]: 0, // No timer for results stage
+} as const
