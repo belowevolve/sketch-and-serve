@@ -1,1 +1,1 @@
-export { useAllPlayersReady, usePlayerReady } from './use-ready'
+export { useAllPlayersReady, usePlayerReady, usePlayersReady } from './use-ready'

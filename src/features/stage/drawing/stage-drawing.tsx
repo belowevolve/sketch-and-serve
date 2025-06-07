@@ -1,24 +1,24 @@
-import { useGameStage } from '@/features/game-stage'
+import { useGameStage } from '@/features/stage'
 import { type CanvasPathType } from '@/shared/lib/canvas'
 import { myPlayer, usePlayerState } from 'playroomkit'
 import { type ChangeEvent, useEffect, useRef, useState } from 'react'
 import { ReactSketchCanvas, type ReactSketchCanvasRef } from 'react-sketch-canvas'
 
-export function DrawingStage() {
+export function StageDrawing() {
 	const canvasRef = useRef<ReactSketchCanvasRef>(null)
 	const currentPlayer = myPlayer()
-	const { assignedNames } = useGameStage()
-	const { isTimerEnded } = useGameStage()
-	const assignedNameToDraw = assignedNames[currentPlayer.id] || ''
-	const [, setDrawState] = usePlayerState<CanvasPathType[] | undefined>(currentPlayer, 'draw', undefined)
-	console.log('help')
+	// const { assignedNames } = useGameStage()
+	// const { isTimerEnded } = useGameStage()
+	// const assignedNameToDraw = assignedNames[currentPlayer.id] || ''
+	// const [, setDrawState] = usePlayerState<CanvasPathType[] | undefined>(currentPlayer, 'draw', undefined)
+	// console.log('help')
 
-	useEffect(() => {
-		if (!isTimerEnded) return
-		canvasRef.current?.exportPaths().then((paths) => {
-			setDrawState(paths)
-		})
-	}, [isTimerEnded, setDrawState])
+	// useEffect(() => {
+	// 	if (!isTimerEnded) return
+	// 	canvasRef.current?.exportPaths().then((paths) => {
+	// 		setDrawState(paths)
+	// 	})
+	// }, [isTimerEnded, setDrawState])
 
 	const [eraseMode, setEraseMode] = useState(false)
 	const [strokeWidth, setStrokeWidth] = useState(5)
@@ -61,7 +61,7 @@ export function DrawingStage() {
 	return (
 		<div className='d-flex flex-column gap-2 p-2'>
 			<h1>
-				Draw this: <span className='font-bold text-blue-600'>{assignedNameToDraw}</span>
+				Draw this: <span className='font-bold text-blue-600'>{assignedNameToDraw.state}</span>
 			</h1>
 			<h1>Tools</h1>
 			<div className='d-flex align-items-center gap-2'>
@@ -122,7 +122,7 @@ export function DrawingStage() {
 				ref={canvasRef}
 				strokeWidth={strokeWidth}
 				eraserWidth={eraserWidth}
-				onStroke={async () => setDrawState(await canvasRef.current?.exportPaths())}
+				// onStroke={async () => setDrawState(await canvasRef.current?.exportPaths())}
 			/>
 		</div>
 	)

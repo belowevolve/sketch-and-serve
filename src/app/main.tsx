@@ -2,6 +2,7 @@ import { insertCoin } from 'playroomkit'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { App } from './app'
+import { AppDevTools } from './app-dev-tools'
 import './app.css'
 
 const root = createRoot(document.getElementById('root')!)
@@ -16,6 +17,7 @@ insertCoin().then(() => {
 	root.render(
 		<StrictMode>
 			<App />
+			{import.meta.env.DEV && <AppDevTools />}
 		</StrictMode>
 	)
 })

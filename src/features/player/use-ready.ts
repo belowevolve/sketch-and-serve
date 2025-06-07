@@ -1,4 +1,5 @@
-import { myPlayer, usePlayerState, usePlayersList } from 'playroomkit'
+import type { PlayerStateWithValue } from '@/shared/lib/playroomkit'
+import { myPlayer, usePlayerState, usePlayersState } from 'playroomkit'
 import { useCallback } from 'react'
 
 export function usePlayerReady() {
@@ -9,12 +10,16 @@ export function usePlayerReady() {
 	return { isReady, toggleReady }
 }
 
+export function usePlayersReady() {
+	return usePlayersState('ready') as PlayerStateWithValue<boolean>[]
+}
+
 export function useAllPlayersReady() {
-	const players = usePlayersList()
-	const allPlayersReady = players.every((player) => player.getState('ready'))
-	const resetAllPlayersReady = () => {
-		players.forEach((player) => {
-			player.setState('ready', false)
+	const players = usePlayersReady()
+	const allPlayersReady = players.every(({ state }) => state)
+	const resetAllPlayersReady = (isReady?: boolean) => {
+		players.forEach(({ player }) => {
+			player.setState('ready', isReady)
 		})
 	}
 	return { allPlayersReady, resetAllPlayersReady }

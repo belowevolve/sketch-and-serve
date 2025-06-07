@@ -5,24 +5,30 @@ interface PlayerWithState<T> {
 	state: T
 }
 
-export function shuffleState<T>(playersWithState: PlayerWithState<T>[]): Record<string, T> {
+export function shuffleState<T>(playersWithState: PlayerWithState<T>[]): Record<string, { state: T; from: string }> {
 	const n = playersWithState.length
 
 	if (n === 0) {
 		return {}
 	}
 	if (n === 1) {
-		return { [playersWithState[0].player.id]: playersWithState[0].state }
+		return {
+			[playersWithState[0].player.id]: { state: playersWithState[0].state, from: playersWithState[0].player.id },
+		}
 	}
 
 	const shuffledIndexedArray = createDerangementArray(n)
 
 	return shuffledIndexedArray.reduce(
 		(acc, i) => {
-			acc[playersWithState[i].player.id] = playersWithState[shuffledIndexedArray[i]].state
+			const shuffledState = playersWithState[shuffledIndexedArray[i]]
+			acc[playersWithState[i].player.id] = {
+				state: shuffledState.state,
+				from: shuffledState.player.id,
+			}
 			return acc
 		},
-		{} as Record<string, T>
+		{} as Record<string, { state: T; from: string }>
 	)
 }
 

@@ -4,17 +4,18 @@ import { addSecondsToNow } from '@/shared/utils/time'
 import { useIsHost, useMultiplayerState, usePlayersState } from 'playroomkit'
 import { useCallback, useEffect } from 'react'
 import { useAllPlayersReady } from '../player'
-import { GAME_STAGE, GAME_STAGE_DURATIONS, type GameStage } from './game-stage'
+import { GAME_STAGE, GAME_STAGE_DURATIONS, type GameStage } from './model/stage'
 import { useMultiplayerTimer } from './use-game-timer'
 
+export type ShuffledState<T> = Record<string, { state: T; from: string }>
 export function useGameStage() {
 	const isHost = useIsHost()
 	const { allPlayersReady, resetAllPlayersReady } = useAllPlayersReady()
-	const [gameStage, setGameStage] = useMultiplayerState<GameStage>('gameStage', GAME_STAGE.START)
+	const [gameStage, setGameStage] = useMultiplayerState<GameStage>('gameStage', GAME_STAGE.NAMING)
 	const names = usePlayersState<string>('name')
 	const draws = usePlayersState<CanvasPathType[]>('draw')
-	const [assignedNames, setAssignedNames] = useMultiplayerState<Record<string, string>>('assignedNames', {})
-	const [assignedDraws, setAssignedDraws] = useMultiplayerState<Record<string, CanvasPathType[]>>('assignedDraws', {})
+	const [assignedNames, setAssignedNames] = useMultiplayerState<ShuffledState<string>>('assignedNames', {})
+	const [assignedDraws, setAssignedDraws] = useMultiplayerState<ShuffledState<CanvasPathType[]>>('assignedDraws', {})
 
 	const handleStageChange = useCallback(
 		(stage: GameStage, timerControls: { restart: (date: Date) => void; pause: () => void }) => {
@@ -51,7 +52,7 @@ export function useGameStage() {
 	const { restart, start, seconds, togglePause, pause } = useMultiplayerTimer({
 		key: 'gameStageTimer',
 		expiryTimestamp: addSecondsToNow(GAME_STAGE_DURATIONS.START),
-		autoStart: false,
+		// autoStart: false,
 		willBeRepeated: true,
 		onExpire: () => handleStageChange(gameStage, { restart, pause }),
 	})
