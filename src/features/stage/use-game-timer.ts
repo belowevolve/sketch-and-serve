@@ -1,7 +1,7 @@
 import { useIsHost, useMultiplayerState } from 'playroomkit'
 import { useCallback, useEffect, useRef, useState } from 'react'
 
-export type TimeFromMillisecondsType = {
+export interface TimeFromMillisecondsType {
 	totalMilliseconds: number
 	totalSeconds: number
 	milliseconds: number
@@ -13,7 +13,7 @@ export type TimeFromMillisecondsType = {
 
 export type AMPMType = '' | 'pm' | 'am'
 
-export type FormattedTimeFromMillisecondsType = {
+export interface FormattedTimeFromMillisecondsType {
 	milliseconds: number
 	seconds: number
 	minutes: number
@@ -131,7 +131,7 @@ export function useInterval(callback: () => void, delay: number | null) {
 
 const SECOND_INTERVAL = 1000
 
-export type useTimerSettingsType = {
+export interface useTimerSettingsType {
 	expiryTimestamp: Date
 	onExpire?: () => void
 	autoStart?: boolean

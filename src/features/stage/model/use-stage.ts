@@ -1,3 +1,5 @@
+import { useMultiplayerState } from 'playroomkit'
+
 export const GAME_STAGE = {
 	START: 'START',
 	NAMING: 'NAMING',
@@ -15,3 +17,7 @@ export const GAME_STAGE_DURATIONS = {
 	[GAME_STAGE.WHERE]: 3,
 	[GAME_STAGE.RESULTS]: 0, // No timer for results stage
 } as const
+
+export function useStage() {
+	return useMultiplayerState<GameStage>('gameStage', GAME_STAGE.START)
+}

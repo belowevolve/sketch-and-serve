@@ -1,8 +1,8 @@
+import type { PlayerProfile } from 'playroomkit'
 import { usePlayersReady } from '@/features/player'
 import { cn } from '@/shared/lib/css'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
 import { Icon } from '@/shared/ui/icon'
-import { type PlayerProfile } from 'playroomkit'
 
 export function Header() {
 	return (
@@ -54,7 +54,7 @@ function PlayerList() {
 function Timer() {
 	return (
 		<div className='bg-white'>
-			<Icon icon={'lucide--pause'} className='size-6' />
+			<Icon icon='lucide--pause' className='size-6' />
 			{/* <p className='text-lg'>
 				Timer: {secondsLeft} seconds <button onClick={togglePause}>Pause</button>
 			</p>

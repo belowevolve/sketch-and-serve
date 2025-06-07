@@ -1,5 +1,5 @@
 import type { PlayerStateWithValue } from '@/shared/lib/playroomkit'
-import { myPlayer, usePlayerState, usePlayersState } from 'playroomkit'
+import { myPlayer, usePlayersState, usePlayerState } from 'playroomkit'
 import { useCallback } from 'react'
 
 export function usePlayerReady() {

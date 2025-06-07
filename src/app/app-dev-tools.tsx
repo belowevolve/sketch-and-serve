@@ -1,5 +1,5 @@
-import { DevTools, DevToolsSection } from '@/shared/components/dev-tools'
 import { usePlayersList } from 'playroomkit'
+import { DevTools, DevToolsSection } from '@/shared/components/dev-tools'
 
 export function AppDevTools() {
 	// const { gameStage, secondsLeft, isTimerEnded, assignedNames } = useGameStage()
@@ -22,8 +22,14 @@ export function AppDevTools() {
 							<div key={player.id} className='flex justify-between text-xs'>
 								<span>{player.id}</span>
 								<div className='space-x-2'>
-									<span>Ready: {player.getState('ready') ? '✓' : '×'}</span>
-									<span>Name: {player.getState('name') || '–'}</span>
+									<span>
+										Ready:
+										{player.getState('ready') ? '✓' : '×'}
+									</span>
+									<span>
+										Name:
+										{player.getState('name') || '–'}
+									</span>
 								</div>
 							</div>
 						))}

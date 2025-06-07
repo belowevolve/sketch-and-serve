@@ -1,5 +1,5 @@
+import { type ClassValue, cva, type VariantProps } from 'cva'
 import { cn } from '@/shared/lib/css'
-import { type ClassValue, type VariantProps, cva } from 'cva'
 
 const iconVariants = cva({
 	base: '',

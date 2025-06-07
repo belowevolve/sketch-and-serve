@@ -1,7 +1,5 @@
-import { useGameStage } from '@/features/stage'
-import { type CanvasPathType } from '@/shared/lib/canvas'
-import { myPlayer, usePlayerState } from 'playroomkit'
-import { type ChangeEvent, useEffect, useRef, useState } from 'react'
+import { myPlayer } from 'playroomkit'
+import { type ChangeEvent, useRef, useState } from 'react'
 import { ReactSketchCanvas, type ReactSketchCanvasRef } from 'react-sketch-canvas'
 
 export function StageDrawing() {

@@ -1,5 +1,5 @@
-import { Button } from '@/shared/ui/button'
 import { useIsHost } from 'playroomkit'
+import { Button } from '@/shared/ui/button'
 
 export function StageResults() {
 	// const { restartGame } = useGameStage()

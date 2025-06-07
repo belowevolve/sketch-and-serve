@@ -1,10 +1,10 @@
-import { GAME_STAGE, useMultiplayerStage } from '@/features/stage'
+import { GAME_STAGE, useStage } from '@/features/stage'
 import { StageDrawing } from '@/features/stage/drawing'
-import { Header } from './header'
-import { StageResults } from '../features/stage/results/stage-results'
 import { StageNaming } from '@/features/stage/naming'
-import { StageWhere } from '@/features/stage/where'
 import { StageStart } from '@/features/stage/start'
+import { StageWhere } from '@/features/stage/where'
+import { StageResults } from '../features/stage/results/stage-results'
+import { Header } from './header'
 
 export function App() {
 	return (
@@ -16,7 +16,7 @@ export function App() {
 }
 
 function StageManager() {
-	const [gameStage] = useMultiplayerStage()
+	const [gameStage] = useStage()
 	return (
 		<main className='mx-auto max-w-lsm'>
 			{
@@ -29,5 +29,13 @@ function StageManager() {
 				}[gameStage]
 			}
 		</main>
+	)
+}
+
+function PauseOverlay() {
+	return (
+		<div className='absolute inset-0 grid place-items-center'>
+			<h1>Game is paused</h1>
+		</div>
 	)
 }

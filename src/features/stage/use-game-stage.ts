@@ -1,10 +1,10 @@
 import type { CanvasPathType } from '@/shared/lib/canvas'
-import { shuffleState } from '@/shared/utils/shuffle-state'
-import { addSecondsToNow } from '@/shared/utils/time'
 import { useIsHost, useMultiplayerState, usePlayersState } from 'playroomkit'
 import { useCallback, useEffect } from 'react'
+import { shuffleState } from '@/shared/utils/shuffle-state'
+import { addSecondsToNow } from '@/shared/utils/time'
 import { useAllPlayersReady } from '../player'
-import { GAME_STAGE, GAME_STAGE_DURATIONS, type GameStage } from './model/stage'
+import { GAME_STAGE, GAME_STAGE_DURATIONS, type GameStage } from './model/use-stage'
 import { useMultiplayerTimer } from './use-game-timer'
 
 export type ShuffledState<T> = Record<string, { state: T; from: string }>
