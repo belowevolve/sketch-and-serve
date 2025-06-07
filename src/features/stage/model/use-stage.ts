@@ -11,7 +11,7 @@ export const GAME_STAGE = {
 export type GameStage = (typeof GAME_STAGE)[keyof typeof GAME_STAGE]
 
 export const GAME_STAGE_DURATIONS = {
-	[GAME_STAGE.START]: 3,
+	[GAME_STAGE.START]: 0,
 	[GAME_STAGE.NAMING]: 10,
 	[GAME_STAGE.DRAWING]: 4,
 	[GAME_STAGE.WHERE]: 3,
@@ -20,4 +20,8 @@ export const GAME_STAGE_DURATIONS = {
 
 export function useStage() {
 	return useMultiplayerState<GameStage>('gameStage', GAME_STAGE.START)
+}
+
+export function useIsTimerPaused(key = 'game') {
+	return useMultiplayerState<boolean>(`${key}-isPaused`, false)
 }

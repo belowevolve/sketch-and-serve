@@ -1,7 +1,9 @@
 import type { PlayerProfile } from 'playroomkit'
 import { usePlayersReady } from '@/features/player'
+import { useIsTimerPaused } from '@/features/stage'
 import { cn } from '@/shared/lib/css'
 import { Avatar, AvatarFallback, AvatarImage } from '@/shared/ui/avatar'
+import { Button } from '@/shared/ui/button'
 import { Icon } from '@/shared/ui/icon'
 
 export function Header() {
@@ -52,9 +54,13 @@ function PlayerList() {
 }
 
 function Timer() {
+	const [isPaused, setIsPaused] = useIsTimerPaused()
+
 	return (
 		<div className='bg-white'>
-			<Icon icon='lucide--pause' className='size-6' />
+			<Button size='icon' onClick={() => setIsPaused(!isPaused)}>
+				<Icon icon={isPaused ? 'lucide--play' : 'lucide--pause'} className='size-6' />
+			</Button>
 			{/* <p className='text-lg'>
 				Timer: {secondsLeft} seconds <button onClick={togglePause}>Pause</button>
 			</p>
