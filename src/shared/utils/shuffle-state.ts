@@ -1,4 +1,4 @@
-interface PlayerWithState<T> {
+type PlayerWithState<T> = {
 	player: {
 		id: string
 	}

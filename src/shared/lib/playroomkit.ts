@@ -1,6 +1,6 @@
 import type { PlayerState } from 'playroomkit'
 
-export interface PlayerStateWithValue<T = unknown> {
+export type PlayerStateWithValue<T = unknown> = {
 	player: PlayerState
 	state: T
 }

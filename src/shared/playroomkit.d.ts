@@ -3,7 +3,7 @@
 declare module 'playroomkit' {
 	export * from 'playroomkit/types'
 
-	export interface PlayerStateWithValue<T> {
+	export type PlayerStateWithValue<T> = {
 		player: PlayerState
 		state: T
 	}
