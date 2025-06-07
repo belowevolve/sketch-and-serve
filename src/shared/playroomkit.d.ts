@@ -23,4 +23,5 @@ declare module 'playroomkit' {
 	): MultiplayerStateHookResult<T>
 
 	export declare function usePlayersState<T = unknown>(key: string): PlayerStateWithValue<T>[]
+	export declare function getState<T = unknown>(key: string): T
 }

@@ -1,8 +1,10 @@
+import type { GameStage } from '@/features/stage'
 import { usePlayersList } from 'playroomkit'
+import { GAME_STAGE, switchStage, useSecondsLeft, useStage } from '@/features/stage'
 import { DevTools, DevToolsSection } from '@/shared/components/dev-tools'
 
 export function AppDevTools() {
-	// const { gameStage, secondsLeft, isTimerEnded, assignedNames } = useGameStage()
+	const [gameStage] = useStage()
 	const players = usePlayersList(true)
 	return (
 		<DevTools>
@@ -10,8 +12,18 @@ export function AppDevTools() {
 				{/* Game Stage */}
 				<DevToolsSection title='Game Stage'>
 					<div className='flex justify-between'>
-						{/* <span>{gameStage}</span> */}
-						{/* <span className={isTimerEnded ? 'text-red-400' : 'text-green-400'}>{secondsLeft}s</span> */}
+						<span>{gameStage}</span>
+						<select
+							value={gameStage}
+							onChange={(e) => switchStage(e.target.value as GameStage)}
+							className='rounded border border-white/20 bg-black px-1 py-0.5 text-xs'
+						>
+							<option value={GAME_STAGE.START}>Start</option>
+							<option value={GAME_STAGE.NAMING}>Naming</option>
+							<option value={GAME_STAGE.DRAWING}>Drawing</option>
+							<option value={GAME_STAGE.WHERE}>Where</option>
+						</select>
+						{/* <span className={secondsLeft ? 'text-red-400' : 'text-green-400'}>{secondsLeft}s</span> */}
 					</div>
 				</DevToolsSection>
 

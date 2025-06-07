@@ -1,6 +1,7 @@
-import type { PlayerStateWithValue } from '@/shared/lib/playroomkit'
 import { myPlayer, usePlayersState, usePlayerState } from 'playroomkit'
 import { useCallback } from 'react'
+import { useHostReaction } from '@/shared/lib/playroomkit'
+import { type GameStage, switchStage } from '../stage'
 
 export function usePlayerReady() {
 	const [isReady, setIsReady] = usePlayerState(myPlayer(), 'ready', false)
@@ -11,7 +12,7 @@ export function usePlayerReady() {
 }
 
 export function usePlayersReady() {
-	return usePlayersState('ready') as PlayerStateWithValue<boolean>[]
+	return usePlayersState<boolean>('ready')
 }
 
 export function useAllPlayersReady() {
@@ -23,4 +24,20 @@ export function useAllPlayersReady() {
 		})
 	}
 	return { allPlayersReady, resetAllPlayersReady }
+}
+
+export function useOnAllPlayersReady(onReady: GameStage | (() => void), onNotReady?: () => void) {
+	const { allPlayersReady } = useAllPlayersReady()
+
+	useHostReaction(() => {
+		if (allPlayersReady) {
+			if (typeof onReady === 'function') {
+				onReady()
+			} else {
+				switchStage(onReady)
+			}
+		} else if (onNotReady) {
+			onNotReady()
+		}
+	}, [allPlayersReady])
 }

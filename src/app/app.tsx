@@ -20,6 +20,7 @@ export function App() {
 
 function StageManager() {
 	const [gameStage] = useStage()
+
 	return (
 		<main className='mx-auto max-w-lsm'>
 			{

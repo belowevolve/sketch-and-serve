@@ -11,7 +11,7 @@ const POSITION_CLASSES: Record<CornerPosition, string> = {
 
 function useDebugControls() {
 	const [isVisible, setIsVisible] = useState(true)
-	const [position, setPosition] = useState<CornerPosition>('bottom-right')
+	const [position, setPosition] = useState<CornerPosition>('top-right')
 
 	// Toggle visibility with Ctrl/Cmd + D
 	useEffect(() => {
@@ -82,6 +82,7 @@ export function DevTools({ children }: { children: React.ReactNode }) {
 						<option value='bottom-right'>↘️</option>
 					</select>
 					<button
+						type='button'
 						onClick={() => setIsVisible(false)}
 						className='text-xs opacity-50 hover:opacity-100'
 						title='Press ⌘/Ctrl + D to show/hide'

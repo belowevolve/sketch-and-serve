@@ -1,3 +1,2 @@
 export * from './model/use-stage'
-
-export { useGameStage } from './use-game-stage'
+export * from './model/use-timer'
