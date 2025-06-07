@@ -3,6 +3,10 @@ import { useCallback } from 'react'
 import { useHostReaction } from '@/shared/lib/playroomkit'
 import { type GameStage, switchStage } from '../stage'
 
+export const DEFAULT_PLAYER_STATES = {
+	ready: false,
+}
+
 export function usePlayerReady() {
 	const [isReady, setIsReady] = usePlayerState(myPlayer(), 'ready', false)
 	const toggleReady = useCallback(() => {

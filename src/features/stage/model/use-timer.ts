@@ -1,5 +1,4 @@
 import { getState, setState, useMultiplayerState } from 'playroomkit'
-import { useRef } from 'react'
 import { useHostReaction } from '@/shared/lib/playroomkit'
 import { type GameStage, switchStage, useStage } from './use-stage'
 
@@ -16,6 +15,7 @@ export function useCurrentSecondsLeft() {
 	const [gameStage] = useStage()
 	return useMultiplayerState<TimerDuration>(`${gameStage}-secondsLeft`, null)
 }
+
 export function updateSecondsLeft(secondsLeft: TimerDuration = null, key: GameStage | string = 'stage') {
 	setState(`${key}-secondsLeft`, secondsLeft)
 }
@@ -26,6 +26,7 @@ export function getSecondsLeft(key = 'stage') {
 
 export function useCountDown(onEnd: GameStage | (() => void)) {
 	const [secondsLeft, setSecondsLeft] = useCurrentSecondsLeft()
+	console.log('secondsLeft', secondsLeft)
 	const [isPaused] = useIsTimerPaused()
 	useHostReaction(() => {
 		if (secondsLeft === null) return

@@ -1,7 +1,8 @@
 import { insertCoin } from 'playroomkit'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
-import { GAME_STAGE, GAME_STAGE_DURATIONS } from '@/features/stage'
+import { DEFAULT_PLAYER_STATES } from '@/features/player'
+import { DEFAULT_STATES } from '@/features/stage'
 import { App } from './app'
 import { AppDevTools } from './app-dev-tools'
 import './app.css'
@@ -15,19 +16,13 @@ root.render(
 )
 
 insertCoin({
-	defaultStates: {
-		stage: GAME_STAGE.START,
-		'START-secondsLeft': GAME_STAGE_DURATIONS.START,
-		'NAMING-secondsLeft': GAME_STAGE_DURATIONS.NAMING,
-		'DRAWING-secondsLeft': GAME_STAGE_DURATIONS.DRAWING,
-		'RESULTS-secondsLeft': GAME_STAGE_DURATIONS.RESULTS,
-	},
-	defaultPlayerStates: { ready: false },
+	defaultStates: DEFAULT_STATES,
+	defaultPlayerStates: DEFAULT_PLAYER_STATES,
 }).then(() => {
 	root.render(
-		<>
+		<StrictMode>
 			<App />
 			{import.meta.env.DEV && <AppDevTools />}
-		</>
+		</StrictMode>
 	)
 })
